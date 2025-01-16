@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://kit.fontawesome.com/d11b5064a9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <title>Felipe & Charlotte's Wedding!</title>
+  <style>
+    /* Base button styles */
+    .toggle-button {
+      display: inline-block;
+      width: 100px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s, color 0.3s;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    /* Toggle off state */
+    .toggle-button.off {
+      background-color: #e0e0e0; /* Light grey */
+      color: #333; /* Dark text */
+    }
+
+    /* Toggle on state */
+    .toggle-button.on {
+      background-color: #69df3e; /* Primary blue */
+      color: #fff; /* White text */
+    }
+  </style>
+</head>
+<body>
+    <section class="hero">
+    <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title">You're invited!</p>
+      <p class="subtitle">{{ message }}</p>
+    </div>
+    </div>
+  </section>
+  <section class="container ml-6">
+      {{#if ceremony_invite}}
+      <div class="container">Ceremony-specific information</div>
+      {{/if}}
+      <div class="container">Reception-specific information</div>
+  </section>
+  {{#if completed}}
+  <section class="hero">
+    <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title">Thank you for responding!</p>
+      <p class="subtitle">Countdown goes here</p>
+    </div>
+    </div>
+  </section>
+  {{else}}
+   <section class="section ml-6">
+    <form action="/rsvp" method="POST">
+      {{#each people}}
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+            {{ this.first_name }} {{ this.last_name }}
+            </p>
+            <div class="card-header-icon">
+              <span class="icon">
+                <i class="fas fa-person" aria-hidden="true"></i>
+              </span>
+            </div>
+          </header>
+          <div class="card-content columns is-3">
+            <div class="column is-half">
+              <input class="input" type="text" name="requirements-{{ this.id }}" id="requirements-{{ this.id }}" placeholder="Dietary Requirements">
+            </div>
+            <div class="column is-half">
+            <div class="select is-fullwidth">
+              <select>
+                <option value="" disabled selected>Food Selection</option>
+                <option name="food_option-{{ this.id }}" id="food_option-c-{{ this.id }}" value="c">Charlotte's Option</option>
+                <option name="food_option-{{ this.id }}" id="food_option-f-{{ this.id }}" value="f">Felipe's Option</option>
+              </select>
+            </div>
+            </div>  
+          </div>
+          <div class="card-footer">
+          <button type="button" id="customToggleButton" class="card-footer-item toggle-button off">
+            Not Attending
+          </button>
+            <input type="hidden"  id="rsvp-{{ this.id }}" name="rsvp-{{ this.id }}" value="false">
+          </div>
+        </div>
+        <br>
+      {{/each}}
+      {{#if plus_one_allowed}}
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            Your +1
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="columns is-3">
+            <div class="is-one-quarter">
+            <input class="input" type="text" name="first-name-plus-one" id="first-name-plus-one" placeholder="First Name">
+          </div> 
+          <div class="is-one-quarter">
+            <input class="input" type="text" name="last-name-plus-one" id="last-name-plus-one" placeholder="Last Name">
+          </div>
+          <div class="is-one-quarter">
+            <input class="input" type="text" name="requirements-plus-one" id="requirements-plus-one" placeholder="Requirements">
+          </div> 
+          <div class="is-one-quarter">
+            <div class="select is-fullwidth">
+              <select>
+                <option value="" disabled selected>Food Selection</option>
+                <option name="food_option-plus-one" id="food_option-c-plus-one" value="c">Charlotte's Option</option>
+                <option name="food_option-plus-one" id="food_option-f-plus-one" value="f">Felipe's Option</option>
+              </select>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+      <br>
+      <input class="button is-fullwidth is-large is-link" type="submit"> 
+      <footer class="footer">
+      <div class="content has-text-centered">
+        <p>Let us know if you want to be contacted differently moving forward</p>
+        <div class="card-content columns is-1">
+          <div class="column is-half">
+          <input class="input" type="email" placeholder="Email" name="email" >
+          </div>
+          <div class="column is-half">
+          <input class="input" type="text" placeholder="Phone" name="phone" >
+          </div>
+        </div>
+          <input type="hidden" value="{{ slug }}" name="slug">
+        </div>
+      </footer>
+    </form>
+    </section>
+  {{/if}}
+  <script>
+    const toggleButton = document.getElementById('customToggleButton');
+    const toggleInput = document.getElementById("rsvp-{{ this.id }}");
+
+    toggleButton.addEventListener('click', () => {
+      const isOn = toggleButton.classList.contains('on');
+      
+      // Toggle classes
+      toggleButton.classList.toggle('on', !isOn);
+      toggleButton.classList.toggle('off', isOn);
+
+      // Update button text
+      toggleButton.textContent = isOn ? 'Not Attending' : 'Attending';
+
+      // Update hidden input value
+      toggleInput.value = isOn ? 'false' : 'true';
+    });
+  </script>
+</body>
+</html>
