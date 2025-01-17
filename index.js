@@ -42,8 +42,9 @@ for(let rsvp of rsvps) {
     updateItem('people', rsvp, { 
       rsvp: req.body[`rsvp-${rsvp}`],
       requirements: req.body[`requirements-${rsvp}`],
-      food_option: req.body[`food_option-${rsvp}`]
-    })
+      food_option: req.body[`food-option-${rsvp}`]
+    }),
+    console.log(req.body)
   );
 }
 
@@ -54,6 +55,7 @@ if(req.body['first-name-plus-one']) {
       first_name: req.body['first-name-plus-one'],
       last_name: req.body['last-name-plus-one'],
       requirements: req.body['requirements-plus-one'],
+      food_option: req.body['food-option-plus-one'],
       is_plus_one: true,
       rsvp: true
     })

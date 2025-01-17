@@ -80,17 +80,17 @@
             <div class="select is-fullwidth">
               <select>
                 <option value="" disabled selected>Food Selection</option>
-                <option name="food_option-{{ this.id }}" id="food_option-c-{{ this.id }}" value="c">Charlotte's Option</option>
-                <option name="food_option-{{ this.id }}" id="food_option-f-{{ this.id }}" value="f">Felipe's Option</option>
+                <option name="food-option-{{ this.id }}" id="food-option-{{ this.id }}" value="c">Charlotte's Option</option>
+                <option name="food-option-{{ this.id }}" id="food-option-{{ this.id }}" value="f">Felipe's Option</option>
               </select>
             </div>
             </div>  
           </div>
           <div class="card-footer">
-          <button type="button" id="customToggleButton" class="card-footer-item toggle-button off">
+          <button type="button" class="card-footer-item toggle-button off" data-person-id="{{ this.id }}">
             Not Attending
           </button>
-            <input type="hidden"  id="rsvp-{{ this.id }}" name="rsvp-{{ this.id }}" value="false">
+          <input type="hidden" class="rsvp-input" data-person-id="{{ this.id }}" name="rsvp-{{ this.id }}" value="false">
           </div>
         </div>
         <br>
@@ -117,8 +117,8 @@
             <div class="select is-fullwidth">
               <select>
                 <option value="" disabled selected>Food Selection</option>
-                <option name="food_option-plus-one" id="food_option-c-plus-one" value="c">Charlotte's Option</option>
-                <option name="food_option-plus-one" id="food_option-f-plus-one" value="f">Felipe's Option</option>
+                <option name="food-option-plus-one" id="food-option-c-plus-one" value="c">Charlotte's Option</option>
+                <option name="food-option-plus-one" id="food-option-f-plus-one" value="f">Felipe's Option</option>
               </select>
             </div>
           </div>
@@ -146,22 +146,26 @@
     </section>
   {{/if}}
   <script>
-    const toggleButton = document.getElementById('customToggleButton');
-    const toggleInput = document.getElementById("rsvp-{{ this.id }}");
+    document.querySelectorAll('.toggle-button').forEach((toggleButton) => {
+  toggleButton.addEventListener('click', () => {
+    // Get the unique person ID from the button's data attribute
+    const personId = toggleButton.getAttribute('data-person-id');
+    
+    // Find the corresponding hidden input using the same person ID
+    const toggleInput = document.querySelector(`.rsvp-input[data-person-id="${personId}"]`);
 
-    toggleButton.addEventListener('click', () => {
-      const isOn = toggleButton.classList.contains('on');
-      
-      // Toggle classes
-      toggleButton.classList.toggle('on', !isOn);
-      toggleButton.classList.toggle('off', isOn);
+    // Toggle the button's state
+    const isOn = toggleButton.classList.contains('on');
+    toggleButton.classList.toggle('on', !isOn);
+    toggleButton.classList.toggle('off', isOn);
 
-      // Update button text
-      toggleButton.textContent = isOn ? 'Not Attending' : 'Attending';
+    // Update the button text
+    toggleButton.textContent = isOn ? 'Not Attending' : 'Attending';
 
-      // Update hidden input value
-      toggleInput.value = isOn ? 'false' : 'true';
-    });
+    // Update the hidden input value
+    toggleInput.value = isOn ? 'false' : 'true';
+  });
+});
   </script>
 </body>
 </html>
