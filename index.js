@@ -29,7 +29,6 @@ app.get('/invite/:slug', async (req, res) => {
 });
 
 app.post('/rsvp', async (req, res) => {
-  console.log(req.body)
   try{
       // Get list of RSVP IDs
   const rsvps = Object.keys(req.body)
@@ -43,8 +42,7 @@ for(let rsvp of rsvps) {
       rsvp: req.body[`rsvp-${rsvp}`],
       requirements: req.body[`requirements-${rsvp}`],
       food_option: req.body[`food-option-${rsvp}`]
-    }),
-    console.log(req.body)
+    })
   );
 }
 
