@@ -42,12 +42,10 @@
     </div>
     </div>
   </section>
-  <section class="container ml-6">
       {{#if ceremony_invite}}
-      <div class="container">Ceremony-specific information</div>
+      <div class="container is-fluid"><div class="notification has-text-centered">Ceremony-specific information</div></div>
       {{/if}}
-      <div class="container">Reception-specific information</div>
-  </section>
+      <div class="container is-fluid has-text-centered mt-4">Reception-specific information</div>
   {{#if completed}}
   <section class="hero">
     <div class="hero-body">
@@ -90,7 +88,7 @@
           <button type="button" class="card-footer-item toggle-button off" data-person-id="{{ this.id }}">
             Not Attending
           </button>
-          <input type="hidden" class="rsvp-input" data-person-id="{{ this.id }}" name="rsvp-{{ this.id }}" value="false">
+          <input type="hidden" class="rsvp-input" data-person-id="{{ this.id }}" name="rsvp-{{ this.id }}" value=false>
           </div>
         </div>
         <br>
@@ -163,7 +161,7 @@
     toggleButton.textContent = isOn ? 'Not Attending' : 'Attending';
 
     // Update the hidden input value
-    toggleInput.value = isOn ? 'false' : 'true';
+    toggleInput.value = isOn ? false : true;
   });
 });
   </script>
