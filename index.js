@@ -56,7 +56,7 @@ if(req.body['first-name-plus-one']) {
       requirements: req.body['requirements-plus-one'],
       food_option: req.body['food-option-plus-one'],
       is_plus_one: true,
-      rsvp: true
+      rsvp: "Coming",
     })
   );
   rsvps.push(id);
