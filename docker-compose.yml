@@ -9,8 +9,6 @@ services:
       - ./extensions:/directus/extensions
     environment:
       SECRET: "replace-with-secure-random-value"
-      ADMIN_EMAIL: "fc@wedding.com"
-      ADMIN_PASSWORD: "07142231Fe"
       DB_CLIENT: "sqlite3"
       DB_FILENAME: "/directus/database/data.db"
       WEBSOCKETS_ENABLED: "true"
