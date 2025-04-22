@@ -30,7 +30,6 @@ app.get('/invite/:slug', async (req, res) => {
 
 app.post('/rsvp', async (req, res) => {
   try{
-  console.log(req.body)
       // Get list of RSVP IDs
   const rsvps = Object.keys(req.body)
   .filter(k => k.includes('rsvp'))

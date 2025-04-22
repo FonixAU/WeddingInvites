@@ -136,3 +136,6 @@ dist
 .pnp.*
 
 .env
+
+#Directus Local
+docker-compose.yml
