@@ -8,6 +8,13 @@
   <title>Felipe & Charlotte's Wedding!</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap');
+    body {
+      background-color:#F9F6EE;
+    }
+    .footer{
+      background-color:#895129;
+      color: #F9F6EE;
+    }
     * {
       font-family: "Bodoni Moda", serif;
       font-optical-sizing: auto;
@@ -24,6 +31,7 @@
       text-align: center;
       cursor: pointer;
       border: none;
+      background-color: #895129;
       transition: background-color 0.3s, color 0.3s;
       font-size: 18px;
       font-weight: bold;
@@ -31,23 +39,23 @@
 
     /* Toggle off state */
     .toggle-button.off {
-      background-color: #e0e0e0; /* Light grey */
-      color: #333; /* Dark text */
+      background-color:#895129; /* Light grey */
+      color: #F9F6EE; /* Dark text */
     }
 
     /* Toggle on state */
     .toggle-button.on {
-      background-color: #69df3e; /* Primary blue */
-      color: #fff; /* White text */
+      background-color: #96aa81; /* Primary blue */
+      color: #F9F6EE; /* White text */
     }
     .secondary{
       background-color: #b49ccc;
-      color: #fff;
+      color: #F9F6EE;
       font-weight: bold;
     }
   </style>
 </head>
-`<body class="container is-max-tablet bodoni-moda-font">
+<body class="container is-max-tablet bodoni-moda-font">
     <section class="hero">
     <div class="hero-body">
     <div class="container has-text-centered">
@@ -77,7 +85,8 @@
       </span>
       </div>
     </div>
-      <div class="container is-fluid"><div class="notification has-text-centered">
+      <div class="container is-fluid">
+        <div class="notification secondary has-text-centered">
         Ceremony-specific information
         </div></div>
       <div class="container is-fluid has-text-centered mt-4">
@@ -92,13 +101,9 @@
         for more information</p>
     </div>
   </section>
-  <footer>
-        <div class="container is-fluid">
-      <div class="notification has-text-centered">
+  <footer class="footer has-text-weight-semibold has-text-centered">
       I was going to add an update button but got lazy sorry.
-       Set in stone now (or shoot us a text lol)
-      </div>
-    </div>
+      Set in stone now (or shoot us a text lol)
 </footer>
   {{else}}
    <section class="section">
@@ -131,7 +136,7 @@
           </div>
           <div class="card-footer">
           <button type="button" class="card-footer-item toggle-button off ff" data-person-id="{{ this.id }}">
-            Not Attending
+          Click To Accept
           </button>
           <input type="hidden" class="rsvp-input" data-person-id="{{ this.id }}" name="rsvp-{{ this.id }}" value='Not Coming'>
           </div>
@@ -146,17 +151,17 @@
           </p>
         </header>
         <div class="card-content">
-          <div class="columns is-3">
-            <div class="is-one-quarter">
+          <div class="columns">
+            <div class="column is-one-quarter">
             <input class="input ff" type="text" name="first-name-plus-one" id="first-name-plus-one" placeholder="First Name">
           </div> 
-          <div class="is-one-quarter">
+          <div class="column is-one-quarter">
             <input class="input ff" type="text" name="last-name-plus-one" id="last-name-plus-one" placeholder="Last Name">
           </div>
-          <div class="is-one-quarter">
+          <div class="column is-one-quarter">
             <input class="input ff" type="text" name="requirements-plus-one" id="requirements-plus-one" placeholder="Requirements">
           </div> 
-          <div class="is-one-quarter">
+          <div class="column is-one-quarter">
             <div class="select is-fullwidth">
               <select class="ff" name="food-option-plus-one">
               <option class="ff" value="" disabled selected>Food Selection</option>
@@ -172,7 +177,8 @@
       <br>
       <input class="button is-fullwidth is-large secondary ff"
       type="submit"> 
-      <footer class="footer">
+      <br>
+      <footer class="footer has-text-weight-semibold">
       <div class="content has-text-centered">
         <p>Let us know if you want to be contacted differently moving forward</p>
         <div class="card-content columns is-1">
