@@ -137,5 +137,7 @@ dist
 
 .env
 
+env.md
+
 #Directus Local
 docker-compose.yml

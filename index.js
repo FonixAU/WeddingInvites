@@ -14,6 +14,10 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
+app.get('/', (req, res) => {
+  res.render('save', { layout: false });
+});
+
 app.get('/invite/:slug', async (req, res) => {
   try{
     const data = await directus.request(
