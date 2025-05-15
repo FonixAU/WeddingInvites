@@ -141,3 +141,4 @@ env.md
 
 #Directus Local
 docker-compose.yml
+.vercel
