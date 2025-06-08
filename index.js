@@ -83,5 +83,3 @@ res.redirect(`/invite/${req.body.slug}`);
 });
 
 app.listen(3000);
-
-module.exports = app;
