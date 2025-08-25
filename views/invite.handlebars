@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://kit.fontawesome.com/d11b5064a9.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <title>Felipe & Charlotte's Wedding!</title>
   <style>
@@ -16,7 +17,7 @@
       font-optical-sizing: auto;
     }
     .footer{
-      background-color:#895129;
+      background-color:#90bd61;
       color: #F9F6EE;
     }
     .ff{
@@ -31,7 +32,7 @@
       text-align: center;
       cursor: pointer;
       border: none;
-      background-color: #895129;
+      background-color: #d482a9;
       transition: background-color 0.3s, color 0.3s;
       font-size: 18px;
       font-weight: bold;
@@ -39,20 +40,54 @@
 
     /* Toggle off state */
     .toggle-button.off {
-      background-color:#895129; /* Light grey */
+      background-color:#d482a9; /* Light grey */
       color: #F9F6EE; /* Dark text */
     }
 
     /* Toggle on state */
     .toggle-button.on {
-      background-color: #96aa81; /* Primary blue */
+      background-color: #90bd61; /* Primary blue */
       color: #F9F6EE; /* White text */
     }
     .secondary{
-      background-color: #b49ccc;
+      background-color: #a975dd;
       color: #F9F6EE;
       font-weight: bold;
     }
+    
+    .hold-submit-button {
+      position: relative;
+      overflow: hidden;
+      background-color: #a975dd;
+      color: #F9F6EE;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+    }
+    
+    .hold-submit-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--fill-width, 0%);
+      height: 100%;
+      background-color: #F9F6EE;
+      color:#a975dd
+      transition: width 0.1s ease-out;
+      z-index: 1;
+    }
+    
+    .hold-submit-button .button-text{
+      position: relative;
+      z-index: 2z;
+      color: #F9F6EE;
+      transition: color 0.1s ease-out;
+    }
+    
+    
   </style>
 </head>
 <body class="container is-max-tablet bodoni-moda-font">
@@ -178,8 +213,9 @@
       </div>
       {{/if}}
       <br>
-      <input class="button is-fullwidth is-large secondary ff"
-      type="submit"> 
+      <button class="button is-fullwidth is-large hold-submit-button ff" type="button" id="holdSubmitBtn">
+        <span class="button-text">Hold to Submit</span>
+      </button> 
       <br>
       <footer class="footer has-text-weight-semibold">
       <div class="content has-text-centered">
@@ -219,6 +255,69 @@
     toggleInput.value = isOn ? 'Not Coming' : 'Coming';
   });
 });
+
+// Hold to submit functionality
+const holdSubmitBtn = document.getElementById('holdSubmitBtn');
+const form = document.querySelector('form');
+let holdTimer;
+let isHolding = false;
+let animationId;
+
+function startHold() {
+  if (isHolding) return;
+  isHolding = true;
+  
+  // Reset fill width
+  holdSubmitBtn.style.setProperty('--fill-width', '0%');
+  
+  // Use requestAnimationFrame for smooth fill animation
+  let startTime = Date.now();
+  function updateFill() {
+    if (!isHolding) return;
+    
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / 2000, 1);
+    const percentage = progress * 100;
+    
+    holdSubmitBtn.style.setProperty('--fill-width', `${percentage}%`);
+    
+    
+    if (progress < 1) {
+      animationId = requestAnimationFrame(updateFill);
+    } else {
+      // Submit the form when hold is complete
+      form.submit();
+    }
+  }
+  
+  animationId = requestAnimationFrame(updateFill);
+}
+
+function endHold() {
+  if (!isHolding) return;
+  isHolding = false;
+  
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+  }
+  
+  // Reset the fill with smooth transition
+  holdSubmitBtn.style.transition = 'all 0.3s ease-out';
+  holdSubmitBtn.style.setProperty('--fill-width', '0%');
+
+  // Remove transition after reset
+  setTimeout(() => {
+    const buttonText = holdSubmitBtn.querySelector('.button-text');
+  buttonText.style.color = '#F9F6EE';
+  }, 200);
+}
+
+holdSubmitBtn.addEventListener('mousedown', startHold);
+holdSubmitBtn.addEventListener('mouseup', endHold);
+holdSubmitBtn.addEventListener('mouseleave', endHold);
+holdSubmitBtn.addEventListener('touchstart', startHold);
+holdSubmitBtn.addEventListener('touchend', endHold);
+holdSubmitBtn.addEventListener('touchcancel', endHold);
   </script>
 </body>
 </html>
