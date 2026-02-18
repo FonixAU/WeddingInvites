@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
   res.render('save', { layout: false });
 });
 
-app.get('/invite/:slug', async (req, res) => {
+app.get('/:slug', async (req, res) => {
   try{
     const data = await directus.request(
       readItem('invites', req.params.slug, { 
