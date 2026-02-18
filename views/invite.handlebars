@@ -17,8 +17,9 @@
       font-optical-sizing: auto;
     }
     .footer{
-      background-color:#90bd61;
+      background-color:#7c9b84;
       color: #F9F6EE;
+      font-weight: bold;
     }
     .ff{
       font-family: "Bodoni Moda", serif;
@@ -46,19 +47,27 @@
 
     /* Toggle on state */
     .toggle-button.on {
-      background-color: #90bd61; /* Primary blue */
+      background-color: #7c9b84; /* Primary blue */
       color: #F9F6EE; /* White text */
     }
+    .primary{
+      
+      font-weight: bold;
+    }
     .secondary{
-      background-color: #a975dd;
+      background-color: #d482a9;
       color: #F9F6EE;
       font-weight: bold;
     }
-    
+    .terciary{
+      background-color:#7c9b84;
+      color: #F9F6EE;
+      font-weight: bold;
+    }
     .hold-submit-button {
       position: relative;
       overflow: hidden;
-      background-color: #a975dd;
+      background-color: #d482a9;
       color: #F9F6EE;
       font-weight: bold;
       border: none;
@@ -74,7 +83,7 @@
       left: 0;
       width: var(--fill-width, 0%);
       height: 100%;
-      background-color: #d482a9;
+      background-color: #7c9b84;
       transition: width 0.1s ease-out;
       z-index: 4z;
     }
@@ -115,19 +124,17 @@
         <span class="icon">
         <i class="fa-solid fa-user-tie"></i>
       </span>
-        Formal Dress
+        Garden Formal
       </span>
       </div>
     </div>
-    {{#if ceremony}}
       <div class="container is-fluid">
-        <div class="notification secondary has-text-centered">
+        <div class="notification terciary has-text-centered">
         Ceremony will be held at 367 Elgar Rd, Mont Albert. Parking available on Blenheim St. 
         </div>
       </div>
-    {{/if}}
-      <div class="container is-fluid has-text-centered mt-4">
-        Reception will be at 6:00 PM, at the PLACE
+      <div class="primary container is-fluid has-text-centered mt-4">
+        Please arrive at 3:30, Ceremony commences at 4:00pm
       </div>
   {{#if completed}}
   <section class="hero">
@@ -158,20 +165,20 @@
             </div>
           </header>
           <div class="card-content columns is-3">
-            <div class="column is-half">
+            <div class="column">
               <input class="input ff" type="text" name="requirements-{{ this.id }}" id="requirements-{{ this.id }}" placeholder="Dietary Requirements">
             </div>
-            <div class="column is-half">
+            {{!-- <div class="column is-half">
             <div class="select is-fullwidth">
               <select class="ff" name="food-option-{{ this.id }}">
               <option class="ff" value="" disabled selected>Food Selection</option>
               <option class="ff" value="Charlotte's Option">Charlotte's Option</option>
               <option class="ff" value="Felipe's Option">Felipe's Option</option>
             </select>
-            </div>
+            </div> --}}
             </div>  
           </div>
-          <div class="card-footer">
+          <div class="card-footer pt-3">
           <button type="button" class="card-footer-item toggle-button off ff" data-person-id="{{ this.id }}">
           Click To Accept
           </button>
