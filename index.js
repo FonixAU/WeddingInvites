@@ -75,7 +75,7 @@ await directus.request(
   })
 );
 
-res.redirect(`/invite/${req.body.slug}`);
+res.redirect(`/${req.body.slug}`);
   }
   catch(e){
     console.error(e);
